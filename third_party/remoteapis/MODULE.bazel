@@ -1,0 +1,4 @@
+module(
+    name = "remoteapis",
+    version = "",
+)
