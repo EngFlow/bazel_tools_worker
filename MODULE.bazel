@@ -1,0 +1,45 @@
+module(
+    name = "tools_worker",
+    version = "1.0",
+)
+
+# required to ensure that maven is setup correctly.
+# why? this happens: '@[unknown repo 'maven' requested from @protobuf~3.19.6]'
+bazel_dep(
+    name = "protobuf",
+    dev_dependency = True,
+    repo_name = "com_google_protobuf",
+    version = "21.7",
+)
+
+bazel_dep(
+    name = "bazel",
+    dev_dependency = True,
+)
+
+# Since bazel doesn't register in the repo, cheat.
+archive_override(
+    module_name = "bazel",
+    strip_prefix = "bazel-6.4.0",
+    urls = [
+        "https://github.com/bazelbuild/bazel/archive/refs/tags/6.4.0.tar.gz",
+    ],
+)
+
+# Fix the yanked version
+single_version_override(
+    module_name = "rules_go",
+    version = "0.39.1",
+)
+
+# Stub out bazel non-modules
+local_path_override(
+    module_name = "remoteapis",
+    path = "./third_party/remoteapis",
+)
+
+# Stub out bazel non-modules
+local_path_override(
+    module_name = "googleapis",
+    path = "./third_party/googleapis",
+)

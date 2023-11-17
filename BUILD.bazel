@@ -1,0 +1,7 @@
+java_binary(
+    name = "work_request_handlers",
+    create_executable = False,  # java_single_jar isn't ready yet.
+    runtime_deps = [
+        "@bazel//src/main/java/com/google/devtools/build/lib/worker:work_request_handlers",
+    ],
+)

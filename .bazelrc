@@ -1,0 +1,6 @@
+# bzlmod simplifies getting bazel as a repo up and running.
+common --enable_bzlmod
+
+# TODO(https://github.com/EngFlow/bazel_tools_worker/issues/2): Remove when worker api is public.
+# Make the private worker API public.
+common --nocheck_visibility
