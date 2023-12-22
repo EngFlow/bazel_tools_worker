@@ -7,9 +7,9 @@ module(
 # why? this happens: '@[unknown repo 'maven' requested from @protobuf~3.19.6]'
 bazel_dep(
     name = "protobuf",
+    version = "21.7",
     dev_dependency = True,
     repo_name = "com_google_protobuf",
-    version = "21.7",
 )
 
 bazel_dep(
