@@ -3,6 +3,18 @@ module(
     version = "1.0",
 )
 
+# declare maven first, to set a version for all
+bazel_dep(
+    name = "rules_jvm_external",
+    version = "5.2",
+)
+
+single_version_override(
+    module_name = "rules_jvm_external",
+    patch_strip = 1,
+    patches = ["//third_party:rules_jvm_external_5.2.patch"],
+)
+
 # required to ensure that maven is setup correctly.
 # why? this happens: '@[unknown repo 'maven' requested from @protobuf~3.19.6]'
 bazel_dep(
@@ -20,9 +32,9 @@ bazel_dep(
 # Since bazel doesn't register in the repo, cheat.
 archive_override(
     module_name = "bazel",
-    strip_prefix = "bazel-6.4.0",
+    strip_prefix = "bazel-7.0.0",
     urls = [
-        "https://github.com/bazelbuild/bazel/archive/refs/tags/6.4.0.tar.gz",
+        "https://github.com/bazelbuild/bazel/archive/refs/tags/7.0.0.tar.gz",
     ],
 )
 
