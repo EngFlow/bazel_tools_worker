@@ -24,22 +24,22 @@ jobs:
           path: "/home/runner/.cache/bazel"
           key: caches-${{ runner.os }}-release
       - name: Build release artifact
-        run: bazelisk build //:work_request_handlers.jar
+        run: bazelisk build //:work_request_handlers_deploy.jar
       - name: Create release sha256
-        run: shasum -a 256 bazel-bin/work_request_handlers.jar > bazel-bin/work_request_handlers.jar.sha256
+        run: shasum -a 256 bazel-bin/work_request_handlers_deploy.jar > work_request_handlers.jar.sha256
       - name: Upload bazel-bin/bazel-bin/work_request_handlers.jar
-        uses: svenstaro/upload-release-action@2.2.1
+        uses: svenstaro/upload-release-action@2.7.0
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: bazel-bin/bazel-bin/work_request_handlers.jar
+          file: bazel-bin/work_request_handlers_deploy.jar
           asset_name: work_request_handlers.jar
           tag: ${{ github.ref }}
           overwrite: true
       - name: Upload bazel-bin/work_request_handlers.jar.sha256
-        uses: svenstaro/upload-release-action@2.2.1
+        uses: svenstaro/upload-release-action@2.7.0
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: bazel-bin/work_request_handlers.jar.sha256
+          file: work_request_handlers.jar.sha256
           asset_name: work_request_handlers.jar.sha256
           tag: ${{ github.ref }}
           overwrite: true
